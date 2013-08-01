@@ -1,0 +1,17 @@
+PRODUCT_NAME = ybootserver_installer_rhel
+CUSTODIAN = ybiip-devel@yahoo-inc.com http://twiki.corp.yahoo.com/view/Devel/YSysBuilder
+OWNER = root
+GROUP = wheel
+
+PACKAGE_OS_SPECIFIC = no
+SYSBUILDER_VERSION = `yinst ls ysysbuilder`
+SHORT_SYSBUILDER_VERSION = `echo $(SYSBUILDER_VERSION) | sed s/ysysbuilder-0.//`
+VERSION = 1.$(SHORT_SYSBUILDER_VERSION)
+
+SHORT_DESC = Libraries and standard steps to install RHEL
+LONG_DESC = $(SHORT_DESC), built with $(SYSBUILDER_VERSION)
+
+YINST bug-product Y Base Image Install Platform
+YINST bug-component ysysbuilder
+
+file       0444 - - share/ybootserver/www/rhel.tar.gz              rhel.tar.gz

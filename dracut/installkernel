@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# install a lot of kernel modules.. doubt we need all of these
+instmods $(find $srcmods -name \*.ko -type f|grep -v /dvb/|grep -v /sound/|grep -v /video/|grep -v /bluetooth/|grep -v /wireless/)

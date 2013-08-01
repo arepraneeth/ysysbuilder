@@ -1,0 +1,6 @@
+---
+net:
+  - pcnet32
+scsi:
+  - Unknown-8086:7111
+  - mptspi

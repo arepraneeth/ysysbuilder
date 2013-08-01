@@ -1,0 +1,8 @@
+---
+net:
+  - e1000
+  - e1000
+  - e100
+scsi:
+  - mptspi
+  - sata_nv

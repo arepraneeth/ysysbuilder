@@ -1,0 +1,22 @@
+#!/usr/local/bin/perl
+
+use strict;
+use warnings 'all';
+use FindBin qw($Bin);
+use File::Find;
+
+our $errors = 0;
+chdir "$Bin/../steps" or die;
+find( \&wanted, "." );
+exit $errors;
+
+sub wanted {
+    return unless /\.pl\z/;
+
+    system("/usr/local/bin/perl -wc '-I$Bin/../lib' $_");
+
+    if ($?) {
+        warn "$File::Find::dir/$_ has errors\n";
+        $errors++;
+    }
+}

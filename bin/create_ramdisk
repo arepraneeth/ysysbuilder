@@ -1,0 +1,63 @@
+######################################################################
+# Copyright (c) 2012, Yahoo! Inc. All rights reserved.
+#
+# This program is free software. You may copy or redistribute it under
+# the same terms as Perl itself. Please see the LICENSE.Artistic file 
+# included with this project for the terms of the Artistic License
+# under which this project is licensed. 
+######################################################################
+
+#!/usr/local/bin/perl
+
+use strict;
+use warnings 'all';
+use SysBuilder::Server;
+use Getopt::Long;
+
+my $help;
+my $dest;
+my $verbose;
+my $gzip = 9;
+my @arch;
+my @kernel;
+
+GetOptions(
+    'verbose'   => \$verbose,
+    'gzip=i'    => \$gzip,
+    'kernel=s@' => \@kernel,
+    'dest=s'    => \$dest,
+    'arch=s@'   => \@arch,
+    'help'      => \$help
+) or usage(2);
+
+usage(2) unless $dest && @arch;
+usage(0) if $help;
+
+my $server = SysBuilder::Server->new( verbose => $verbose );
+
+$server->create_ramdisk(
+    gzip   => $gzip,
+    kernel => \@kernel,
+    dest   => $dest,
+    arch   => \@arch
+);
+
+sub usage {
+    my $err = shift;
+    print <<EOT;
+
+$0 [options]
+
+where options are:
+    --help              print this message
+    --verbose           be more verbose
+    --gzip=number       compression level to use [optional - default 9 (max)]
+    --dest=filename     name for the ramdisk image
+    --arch=architecture include modules for this architecture
+                        [can be specified multiple times]
+    --kernel=versions   include kernel modules for this version
+                        [can be specified multiple times]
+EOT
+
+    exit($err);
+}

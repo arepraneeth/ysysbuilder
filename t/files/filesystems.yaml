@@ -1,0 +1,5 @@
+---
+/:
+  disk: sda
+  part_nr: 1
+  phys: sda1

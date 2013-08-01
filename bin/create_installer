@@ -1,0 +1,64 @@
+######################################################################
+# Copyright (c) 2012, Yahoo! Inc. All rights reserved.
+#
+# This program is free software. You may copy or redistribute it under
+# the same terms as Perl itself. Please see the LICENSE.Artistic file 
+# included with this project for the terms of the Artistic License
+# under which this project is licensed. 
+######################################################################
+
+#!/usr/local/bin/perl
+
+use strict;
+use warnings 'all';
+use SysBuilder::Server;
+use Getopt::Long;
+
+my @steps;
+my $verbose;
+my $name;
+my $help;
+my $out_dir = "/tftpboot";
+
+GetOptions('name=s' => \$name, 
+    'steps=s@' => \@steps,
+    'out=s' => \$out_dir,
+    'verbose' => \$verbose,
+    'help' => \$help) or usage(2);
+
+usage(2) unless $name && @steps;
+usage(0) if $help;
+
+my $server = SysBuilder::Server->new(verbose => $verbose);
+
+$server->create_installer( 
+    name => $name,
+    out => $out_dir,
+    steps => \@steps);
+
+sub usage {
+    my $err = shift;
+    print <<EOT;
+
+$0 [options]
+
+where options are:
+    --help              print this message
+    --name=str          name for this installer [required]
+    --steps=steps       directory with steps
+                        [required]
+    --out=directory     directory where the output <name>.tar.gz will be stored
+                        [optional - default=/tftpboot]
+
+Example usage:
+
+$0 --steps=std-rhel --steps=vm --name=vm --out=/tftproot
+
+That will create /tftproot/vm.tar.gz with steps from std-rhel and vm.
+If there are steps in the vm/ directory that have the same step number as
+steps in the std-rhel directory, the steps in vm will be used.
+
+EOT
+
+    exit($err);
+}

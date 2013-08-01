@@ -1,0 +1,546 @@
+Version 0.18.21
+* [bugie] bump version to remake rhel5 ramdisk
+
+Version 0.18.20
+* [bug 5614323] Added ESXi installer
+
+Version 0.18.19
+* [bug 5369642] detect virtio
+* [bugie] fix missing lib for conrep
+* [bug 5649424] Changing Firmware bios update particularly for dell
+
+Version 0.18.18
+* [bug 5400214] allow for tmpfs fstype 
+
+Version 0.18.17
+* [bug 5094607] make gpt the default disk label
+
+Version 0.18.16
+* [bug 5076414] update for rhel 6 swraid creation
+* [bug 5094607] add layout option for swraid
+
+Version 0.18.15
+* [bug 4838367] Detect network devices using ifconfig instead of lspci
+* [bug 4838367] Pass --device-map to grub after grub-install failure
+* [bug 4466080] Really make fix work for RHEL 6, parted >= 1.9.0
+
+Version 0.18.14
+* [bug 4466080] Make fix work for RHEL 6, parted >= 1.9.0
+
+Version 0.18.13
+* [bug 4466080] Fix bug that would make partitions too small
+* [bug 4771342] Update Firmware module for IPMI
+* [bug 4634514] add give status on port 8888
+* [bug 4318953] Stop network when wipe drives completes
+
+Version 0.18.12
+* [bug 4787014] Disable IPv6 autoconfiguration during install-time
+
+Version 0.18.11
+* [bug 4758187] Support for "syslog_server" profile key
+
+Version 0.18.10
+* [bug 4571560] rhel 6 does not use inittab
+* [bug 4758552] Support for ybiip build tickets (build_id in hostconfig)
+* [bug 4758506] Register public host key fingerprints using intercom.pl
+
+Version 0.18.9
+* [bug 4611014] (revised) add attempts:3 and timeout:1 to /etc/resolv.conf
+
+Version 0.18.8
+* [bug 4611014] add attempts:3 and timeout:1 to /etc/resolv.conf
+* [bug 4613344] incorporate windows utils into dracut-built ramdisks
+
+Version 0.18.7
+* [bug 3836774] dracut/install: add lsiutil
+* [bug 4609943] dracut/install: add /dev/mem to static /dev for rhel4x
+* [bug 4609943] Format of dmidecode output has changed
+
+Version 0.18.6
+* [bug 4574158] persistent network interface naming on rhel5/6
+* [bug 4590773] correctly disable ipv6 on newer rhel releases
+* [bug 4582780] create initrds for all kernels (not just the default one)
+* [bug 4590741] filter out kernel-firmware rpm when looking for kernels
+* [bug 4447391] remove unneeded udev rules from rhel6 ramdisk
+* [bug 4573154] fix udev error messages when installing rhel6
+* [bug 4571541] only write /etc/sysconfig/hwconf if kudzu is present
+* [bug 4582924] only chkconfig services that are present
+* [bug 4584812] include /etc/mke2fs.conf on ramdisk
+
+Version 0.18.5
+* [bug 4447391] dracut progs-required: remove "faillog"
+
+Version 0.18.4
+* [bug 4584812] load ahci for vendor:device 0x00008086:0x00003b22 if missing
+                from modules.pcimap (affects rhel4)
+
+Version 0.18.3
+* [bug 4584812] include all hpacucli files
+
+Version 0.18.2
+* [bug 4584812] load ahci for vendor:device 0x00008086:0x00003a22 if missing
+                from modules.pcimap (affects rhel4)
+* [bug 4447391] dracut installkernel: find mods based on $srcmods instead of
+                currently running kernel
+* [bug 4447391] create ext3 with mke2fs -j instead of mkfs.ext3 for backwards
+                compatibility with older ramdisks
+
+Version 0.18.1
+* [bug 4574680] fix hang while loading bnx2 driver under a rhel 6 ramdisk
+* [bug 4571556] fix "error: /etc/logrotate.conf:9 extra arguments for create"
+
+Version 0.18.0
+* [bug 3836567] update args to shred
+* [bug 3836774] break RAID to JBOD before wipe. CCISS support only.
+* [bug 4424697] add /home/y/bin64 to PATH on 64-bit systems
+* [bug 4447391] recognize kernel version 2.6.32 (el6) and allow underscores
+* [bug 4447391] misc fixes for rhel6. include experimental dracut module.
+* [bug 4571533] support for ext4
+
+Version 0.17.1
+* [bug 4273005] allow for yahoo custom kernels
+
+Version 0.17.0
+* [bug 3937445] ntp server should be fetched from dhcp rather than hardcoded convention
+* [bug 2599313] shorten figlet banner message in Driver.pm
+
+Version 0.16.4
+* [bug 3875946] more blacklisted keys
+
+Version 0.16.3
+* [bug 3671320] wipe drive would report PASS even if siginit was passed to the shred process
+
+Version 0.16.2
+* [bug 3601371] Don't reboot after the wipe process
+* [bug 3598428] Add verbose output from shred process
+* [bug 3545737] allow xen dom0 to use all cpus
+* [bug 3636061] warn if ntp server is unreachable
+
+Version 0.16.1
+* [arnoldch] make ssh host key preservation code more reliable
+
+Version 0.16.0
+* [bug 2455670] provide and store clone info on host
+* [bug 2521597] ysysbuilder mnt errors after successful install
+* [bug 3537658] generate ssh host keys if not already there
+
+Version 0.15.4
+* [bug 2762220] regex fix to cover more types of output
+
+Version 0.15.3
+* [bug 2834069] move default ntp drift file to rhel default /var/lib/ntp
+* [bug 2259194] set "IPV6_AUTOCONF=no" in /etc/sysconfig/network when configuring ipv6
+* [bug 2762220] Add support to sanitize hard drive and query for serial num 
+
+Version 0.15.2
+* [bug 3252922] move create_md_device method into DiskConfig.pm
+
+Version 0.15.1
+* [bug 2259194] - revise ipv6 values to match ybootserver implementation
+
+Version 0.15.0
+* [bug 2259194] - initial support for configuring ipv6 addresses
+* [bug 3252922] - Create additional /dev/md block devices
+
+Version 0.14.5
+* [Bug 3160727] default to SMP kernel if the code chooses a kernel 
+     is not in the image
+* [bug 3055982] - fix ysysbuilder.sh profile.d permissions (0755)
+
+Version 0.14.4
+* [bug 3125943] Change behavior of lvm/free keyword
+  
+Version 0.14.3
+* [bug 3125943] Fix issue when trying to reserve free space
+
+Version 0.14.2
+* [bug 3035148] (S3 Security Bug) set grub.conf file permissions 0600
+
+Version 0.14.1
+* [bug 2755307] Add new burn-in type installer for hw testing/burn-in
+* [bug 2942887] Add support for setting ip_conntrack hash
+* hw validation should always happen if required keys are defined
+
+Version 0.14.0
+* [bug 2981573] allow hardware validation steps ala JumpStart
+
+Version 0.13.6
+* [Bug 2755307] add a sysbuilder ramdisk which only runs burn-in tests
+
+Version 0.13.5
+* [bug 2972222] disable ipv6 by default
+
+Version 0.13.4
+* [Bug 2953263] expand fstab defaults to 'noatime,nodiratime'
+
+Version 0.13.3
+* [Bug 2928247] fix logic for SMP vs. LargeSMP kernel
+* [Bug 2812595] support for installing largesmp kernel
+
+Version 0.13.2
+* [Bug 2864095] better old-hostname recognition for ssh host key preservation
+
+Version 0.13.1
+* [Bug 2033506] Fix minor bug in print statement
+
+Version 0.13
+* [Bug 2033506] adding framework for firmware/BIOS updates
+
+Version 0.12.7
+* [bug 2761670] Don't mangle resolv.conf when running cm_activate
+
+Version 0.12.6
+* [bug 2676916] Create /etc/mtab in chroot before running cm_activate (for yinst)
+* [bug 2683002] Stop echoing password hashes
+* [bug 2654773] Fixes for Windows filesystem geometry on tricky hardware
+
+Version 0.12.5
+* [bug 2694807] deal with an empty grub config (expected on esx)
+
+Version 0.12.4
+* [bug 2654773] fix mounting issues on some hardware
+
+Version 0.12.3
+* [bug 2619932] no longer write out sysprep.inf on windows (merlino)
+* [bug 2654773] use standard disk config code on windows (ericksom)
+* [bug 2658490] include list of keys to skip in preserve_ssh_keys (merlino)
+
+Version 0.12.2
+* [bug 2658490] remove ssh keys if present in the image
+
+Version 0.12.1
+* [Bug 2648160] allow running commands without chroot in CfgManagement (merlino)
+
+Version 0.12
+* [bug 2648229] Fix swraid using cciss devices (dmuino)
+* [bug 2644964] add configuration option for dom0_mem with default of 1G (daryn)
+* [bug 2644953] copy mtab prior to grub-install invocation and replace mtab occurances of /mnt/ with / (daryn)
+* [bug 2644996] increase max_loop and update tests (daryn)
+
+Version 0.11.1
+- Remove should_i_wait support
+- Perltidy all code to the new -pbp standard
+
+Version 0.11
+- Supports xen (/etc/grub.conf generation + auto-selecting right xen
+version + console settings)
+
+Version 0.10.9
+- kernel_version can specify a partial match. (very useful to say:
+kernel_version: xen and don't worry about the exact kernel version
+shipped with the image)
+
+Version 0.10.8
+- Enable IPv6 by default
+
+Version 0.10.7
+- Add correct restrict lines to ntp.conf.
+
+Version 0.10.6
+- [Bug 2523104] cciss devices on Windows
+
+Version 0.10.5
+- windows private IP build support
+
+Version 0.10.4
+- windows bug fixes
+
+Version 0.10.3
+- ::TEMPLATE_VARS:: were not expanded properly in the postinstall section
+
+Version 0.10.2
+- [bug 1901402] pass mac to windows post install script, change ipinput format
+
+Version 0.10.1
+- Temporarily modify resolv.conf while running cm_fetch and cm_activate
+- Create rc.once.d directory if necessary for postinstall
+- [bug 1901402] Windows support
+
+Version 0.10.0
+- Allow resolv.conf to be overriden
+- Add postinstall section to config file (compatible with
+ybsdinstaller)
+- Default base == http://dhcp_server:4080/
+
+Version 0.9.15
+- don't attempt to second guess which vmnic corresponds to which ethernet interface
+
+Version 0.9.14
+- [bug 2352614] hwdata/pcitable in addition to pcimap for hw <->
+module mappings.
+
+Version 0.9.13
+- [bug 1791686] Map vswif0 to primary interface
+- [bug 2205264] Revert to UTC when requested timezone doesn't exist
+- [bug 2269655] VMs should use clock=pit
+- Do not attempt to scan LVM on ESX (looking for old ssh keys)
+
+Version 0.9.12
+- [bug 2243251] ysysbuilder yinst pkg has missing dep on ports/rsync
+- [bug 2243249] create_image returns bad exit code on failure
+- [bug 2243256] create_image does not set/reset $ENV{PATH}
+
+Version 0.9.11
+- Work around a bug in mkinitrd by not using LABEL=/ for RHEL 5.x
+
+Version 0.9.10
+- if grub-install fails, then try to use the grub command directly
+  to install the bootloader.
+
+Version 0.9.9
+- Disable broadcast from fatal_error
+
+Version 0.9.8
+- Use '(hd0)' instead of 'hd0'.
+- Disable broadcast for notify_boothost
+- Remove notify_boothost from the bootloader configuration
+
+Version 0.9.7
+- ESX doesn't support --no-floppy with grub-install.
+
+Version 0.9.6
+- Use grub-install (newer version of grub seems to need it)
+- The generated installer now is more verbose and prints timestamps.
+
+Version 0.9.5
+- remove dependency on ysysbuilder_ramdisk_rh44
+- initial ntp.conf file
+
+Version 0.9.4
+- old hostname fixes for ssh key preservation
+
+Version 0.9.3
+- Print IMAGING COMPLETED at the end of a successful process. (for
+  compatibility with freebsd)
+
+Version 0.9.2
+- ignore failure to recognize the hwraid module to use. Some profiles
+  are specifying hwraid: jbod even for non-hwraid machines.
+
+Version 0.9.1
+- [bug 1484755] attempt to preserve current ssh keys if the hostname
+remains the same
+- kill acpid before attempting to umount filesystems (needed on RHEL5)
+
+Version 0.9.0
+- [bug 1484755] if ssh_keys_location is present in the profile,
+attempt to fetch a tar with the ssh keys from it.
+
+Version 0.8.2
+- fix image_linux() bug (preparing for windows imaging)
+- fix parse_size() bug (need to pass total size to parse_size now to
+be able to deal with 10% as a valid size)
+
+Version 0.8.1
+- [bug 2058513] feature to reserve a certain amount of disk
+- [bug 2063627] Choose UP kernel by default for UP machines
+- [bug 1929882] ysysbuilder misrecognizes the normal rhel4.7 as a xen kernel
+
+Version 0.8.0
+- Split ysysbuilder into components.
+
+Version 0.7.2
+- Add megacli support to RHEL < 4.6 (it was 4.6 specific before)
+
+Version 0.7.1
+- Cap memsize to 12GB for swap partitions
+
+Version 0.7.0
+- Support for booting from a sw raid volume
+- Starting support for HW Raid using megacli (dell 2950s for example)
+- Jbod mode for megacli
+- Updated owner -> ybiip-devel
+
+Version 0.6.9
+- Bug fix: yvm doesn't set image-name to rhel4, so we can't autodetect
+  the os version from the tarball name. To be safe: don't use LABEL=/
+  when the tarball name is root*
+
+Version 0.6.8
+- Use labels for / except for rhel == 4.x
+- wipe the partition table for all disks (unless only_reconfigure)
+- diskconfig will now create vmfs3 partitions for all unused drives
+- esx: use all existing 'fb' partition types for the default volume
+
+Version 0.6.7
+- Instead of checking for a short elapsed time as an indication of an
+incomplete run, we check for the existance of a file in /tmp.
+
+Version 0.6.6
+- Add bug product
+
+Version 0.6.5
+- Avoid the need for 2 extra reboots to create /etc/vmware/esx.conf
+(one from ysysbuilder + one from vmware when it detects the file changed)
+
+Version 0.6.4
+- Create /etc/vmware/esx.conf with information about all hardware on
+the machine, including NICs and PCI devices. This requires a couple of
+reboots for ESX to see. (bz 1791698)
+
+Version 0.6.3
+- Create /etc/sysconfig/hwconf with all the hardware information
+
+Version 0.6.2
+- Create rc.local that executes rc.once.d/* for RHEL and ESX
+- Don't generate warnings when there are no files to execute for rc.once.d
+
+Version 0.6.1
+- Use esxcfg-vmhbadevs to map linux devices to esx devices (stop
+hardcoding sda/vmhba0:0:0)
+- Generate /etc/udev/rules.d/52-eth.rules to prevent unwanted NIC
+renaming during kernel upgrades
+
+Version 0.6.0
+- ESX support
+  - grub.conf management using esxcfg-boot
+  - use UUID to specify root partition
+  - initrd is generated using esxcfg-boot
+  - don't use udevd
+  - don't bind mount /mnt/dev
+  - don't add /sys entries to /etc/fstab
+  - use /etc/modules.conf instead of /etc/modprobe.conf
+  - handle vswif0 interface configs
+- Add 'memsize' as a size specifier for disk partitions: useful for
+  swap partitions
+- Add 'type' option for disk partitions: valid settings:
+  - ext2 (default)
+  - linux-swap
+  - vmfs3
+  - vmkernel
+- Don't generate duplicated entries for /etc/inittab and
+  /etc/securetty when adding ttyS# and xvc entries
+- Add a directory /etc/rc.d/rc.once.d/:
+  all files in that directory will be executed once, and then deleted.
+  Useful for the creation of /vmfs entries under ESX
+
+Version 0.5.4
+- add only_reconfigure config option. This option tells ysysbuilder to
+avoid partitioning/mkfs/
+
+Version 0.5.3
+- on errors set nextboot=build and optionally wait for 2 hours before
+attempting to reboot.
+
+Version 0.5.2
+- cciss devices require 'p' + part_nr: cciss/c0d0p1
+
+Version 0.5.1
+- Custodian ia-devel
+
+Version 0.5.0
+- Kill cupsd if it was started during installation
+- Templates now take a net object: GATEWAY_IP, etc. get expanded
+properly now
+- If we can't umount a filesystem during finish show the output of ps -ef
+
+Version 0.4.9
+- abort if any step exits with errcode != 0
+
+Version 0.4.8
+- call should_i_wait.pl - for backwards compat continue only if
+error==404
+
+Version 0.4.7
+- hwconfig_only:1 in the config means reboot after configuring the hw
+raid. the boothost is notified that we're doing a 'stage2'
+
+Version 0.4.6
+- merlino@: console and root-disk-device are sent to the boothost
+- add a default path to the system
+- set the default perms for log files
+- remove dependencies from the yicf file that are only needed for
+building
+- created meta pkg: ysysbuilder_build with the list of packages
+needed to build us.
+
+Version 0.4.5
+- bugfix: import fatal_error into CfgManagement
+- minilogd might be started inside /mnt; try to kill it before
+umount()
+
+Version 0.4.4
+- timezone on RHEL should be managed by /etc/sysconfig/clock +
+tzdata-update
+- write_file uses temp. file + rename
+
+Version 0.4.3
+- Bugfix: SystemFiles was using a template object that didn't know
+about the main IP for the host -> /etc/hosts was not updated properly
+
+Version 0.4.2
+- Fixed a bug in Network.pm - it was returning the live values
+  instead of values specified in the config.
+
+Version 0.4.1
+- add default_kernel_version method to Y:S:BootLoader
+- add timezone parameter (defaults to UTC)
+- add services parameter (things like kudzu/ntpd, etc. can be
+  enabled/disabled now)
+
+Version 0.4.0
+- sysinstall renamed ysysbuilder
+
+Version 0.3.0
+- preliminary support for xen (paravirt)
+- add grub_serial_disabled setting to work around some broken BIOSes
+- bug fixes in software raid configs
+- new config option: kernel_version to specify an exact kernel version
+- heuristics determine the kernel to boot from grub
+
+Version 0.2.3
+- test disks unless quick_install
+
+Version 0.2.2
+- notify_boothost nextboot=normal when finished.
+- bug fix in set root passwd
+- update default parameters for notify_boothost
+- don't attempt to run update-pciids when building a ramdisk
+
+Version 0.2.1
+- Add cm_fetch and cm_activate support.
+- Add default root passwd
+- Add ttyS0 .. ttyS2 to /etc/securetty
+- Add DMyahoo-inc.com to /etc/mail/sendmail.cf
+
+Version 0.2.0
+- Quote url in notify_boothost
+
+Version 0.1.9
+- Add quick_install support.
+- If we're testing, then break any hw raids into JBOD
+- Add HW Raid support for LSI
+- Notify boothost in the event of errors or a successful jump
+- Add symlinks to disk_config
+
+Version 0.1.8
+- Create /etc/mdadm.conf for sw raid
+- Don't use LABEL= for / since it confuses mkinitrd on RHEL4
+- Always run mkinitrd
+
+Version 0.1.7
+- Only run mkinitrd for 2.6.18
+
+Version 0.1.6
+- Bug fix for symlinks
+
+Version 0.1.5
+- Create standard symlinks for shells
+
+Version 0.1.4
+- Remove kudzu.noload - this has to be fixed someday
+- create an initrd for the default kernel always
+
+Version 0.1.3
+- Set the default owner and group in the yicf file
+
+Version 0.1.2
+- Bug fix: GATEWAY=<IP> lines were missing from /etc/sysconfig/network
+
+Version 0.1.1
+- Only run update-pciids if present
+
+Version 0.1.0
+- Initial release: Libraries and standard steps for an installer. Includes a
+  ramdisk and modules for the base installer.
+

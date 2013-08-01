@@ -1,0 +1,17 @@
+---
+eth0:
+  broadcast_address: 169.254.100.255
+  dhcp_lease_time: 1800
+  dhcp_message_type: 5
+  dhcp_server_identifier: 169.254.100.254
+  domain_name: foo.com
+  domain_name_servers: 169.254.100.2
+  expiry: 1182454849
+  filename: pxelinux.0
+  interface: eth0
+  ip_address: 169.254.100.3
+  network_number: 169.254.100.0
+  routers: 169.254.100.2
+  server_name: js32.net.foo.com
+  subnet_mask: 255.255.255.0
+  ntp_servers: 169.254.100.10 169.254.100.11

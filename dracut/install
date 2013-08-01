@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# create some placeholder dirs
+mkdir -p "${initdir}/etc"
+mkdir -p "${initdir}/tmp"
+mkdir -p "${initdir}/usr/local/bin"
+mkdir -p "${initdir}/mnt"
+mkdir -p "${initdir}/opt"
+
+# install various programs needed by sysbuilder
+dracut_install $(cat $moddir/progs-required)
+dracut_install -o $(cat $moddir/progs-optional)
+for prog in $(egrep -h "/s?bin/" $moddir/progs-required $moddir/progs-optional)
+do
+    ln -sf "$prog" "${initdir}/usr/local/bin/$(basename $prog)"
+done
+
+# install udev
+dracut_install udevd
+
+if grep -q Nahant /etc/redhat-release
+then
+    # rhel4 - build a static /dev
+    mkdir ${initdir}/etc/dev.static
+    for sys in cciss ed fb fd hd ida loop md mem random rd rtc scd sd sr tty urandom
+    do
+        MAKEDEV -d ${initdir}/etc/dev.static $sys
+    done
+elif grep -q Tikanga /etc/redhat-release
+then
+    # rhel5 - slightly outdated but still workable udev
+    dracut_install udevsettle udevtrigger
+
+    # rhel5 - useful udev rules
+    inst_rules 05-udev-early.rules
+
+    # rhel5 - firmware loaded with /sbin/firmware_helper
+    [ -e /sbin/firmware_helper ] && dracut_install /sbin/firmware_helper
+
+    # install udev.conf
+    inst "$moddir/udev.conf" "/etc/udev/udev.conf"
+else
+    # rhel6 + others (give the benefit of the doubt)
+    # newer udev controlled by udevadm
+    dracut_install udevadm
+
+    # rhel6 - useful udev rules
+    inst_rules 50-firmware.rules
+
+    # rhel6 - firmware loaded with /lib/udev/firmware.sh
+    dracut_install /lib/udev/firmware.sh
+
+    # install udev.conf
+    inst "$moddir/udev.conf" "/etc/udev/udev.conf"
+fi
+
+# copy over /etc/services so we can use named ports
+inst /etc/services
+
+# copy over /etc/mke2fs.conf 
+[ -e "/etc/mke2fs.conf" ] && inst /etc/mke2fs.conf
+
+# need libnss_files and libnss_dns for name resolution
+for dir in "$usrlibdir/tls/$arch" "$usrlibdir/tls" "$usrlibdir/$arch" \
+    "$usrlibdir" "$libdir"; do
+    for i in "$dir"/libnss_dns* "$dir"/libnss_files*; do
+        [ -e "$i" ] && dracut_install "$i"
+    done
+done
+
+
+
+# install sysbuilder itself
+cp -a /libexec/sysbuilder/client "${initdir}/sysbuilder"
+mkdir -p "${initdir}/sysbuilder/lib"
+cp -a /lib/perl5/site_perl/SysBuilder "${initdir}/sysbuilder/lib"
+
+# install sysbuilder "steps" (installers)
+mkdir -p "${initdir}/sysbuilder/steps";
+/bin/create_installer --name=rescue --steps=rescue --out="${initdir}/sysbuilder/steps"
+/bin/create_installer --name=firmware --steps=std-firmware --out="${initdir}/sysbuilder/steps"
+/bin/create_installer --name=rhel --steps=std-rhel --out="${initdir}/sysbuilder/steps"
+/bin/create_installer --name=esxi --steps=std-esxi --out="${initdir}/sysbuilder/steps"
+/bin/create_installer --name=windows --steps=std-windows --out="${initdir}/sysbuilder/steps"
+/bin/create_installer --name=wipedrives --steps=wipe_drives --out="${initdir}/sysbuilder/steps"
+
+# install sysbuilder dhclient-script
+ln -sf /sysbuilder/dhclient-script "${initdir}/sbin/dhclient-script"
+
+# install sysbuilder init
+ln -sf /sysbuilder/init "${initdir}/init"
+
+# install redhat-release ]
+dracut_install -o /etc/redhat-release 
+

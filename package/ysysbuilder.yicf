@@ -1,0 +1,30 @@
+PRODUCT_NAME = ysysbuilder
+CUSTODIAN = ybiip-devel@yahoo-inc.com http://twiki.corp.yahoo.com/view/Devel/YSysBuilder
+OWNER = root
+GROUP = wheel
+
+VERSION = `awk '/^Version/ {print $2;exit}' README`
+
+SHORT_DESC = Libraries and standard steps to install linux
+LONG_DESC = `cat README`
+
+SRCDIRS = ..
+
+YINST bug-product Y Base Image Install Platform
+YINST bug-component ysysbuilder
+YINST replaces pkg sysinstall * 0.3.9
+YINST requires pkg perlbase * *
+YINST requires pkg ypan/perl-Net-Netmask * *
+YINST requires pkg ypan/perl-TermReadKey * *
+YINST requires pkg ypan/perl-YAML * *
+
+file 0555 - - bin/create_installer      ../bin/create_installer
+find 0644 - - lib/perl5/site_perl/      ../lib    -type f \! -path "*.svn*" \! -name "*.swp"
+find 0755 - - libexec/ysysbuilder/steps/  ../steps  -type f \! -path "*.svn*" \! -name "*.swp"
+find 0755 - - libexec/ysysbuilder/client/ ../client -type f \! -path "*.svn*" \! -name "*.swp"
+find 0755 - - libexec/ysysbuilder/dracut/ ../dracut -type f \! -path "*.svn*" \! -name "*.swp"
+
+IMAGES=/home/y/var/ysysbuilder
+
+YINST post-activate rm -rf /home/y/var/sysinstall ; \
+      ln -s $(IMAGES) /home/y/var/sysinstall

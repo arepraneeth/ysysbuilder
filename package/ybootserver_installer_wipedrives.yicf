@@ -1,0 +1,17 @@
+PRODUCT_NAME = ybootserver_installer_wipedrives
+CUSTODIAN = ybiip-devel@yahoo-inc.com http://twiki.corp.yahoo.com/view/Devel/YSysBuilder
+OWNER = root
+GROUP = wheel
+
+PACKAGE_OS_SPECIFIC = no
+SYSBUILDER_VERSION = `yinst ls ysysbuilder`
+SHORT_SYSBUILDER_VERSION = `echo $(SYSBUILDER_VERSION) | sed s/ysysbuilder-0.//`
+VERSION = 1.$(SHORT_SYSBUILDER_VERSION)
+
+SHORT_DESC = Utility to wipe all data from hard disks.
+LONG_DESC = $(SHORT_DESC), built with $(SYSBUILDER_VERSION)
+
+YINST bug-product Y Base Image Install Platform
+YINST bug-component ysysbuilder
+
+file       0444 - - share/ybootserver/www/wipedrives.tar.gz              wipedrives.tar.gz
